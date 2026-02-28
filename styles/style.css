@@ -192,6 +192,11 @@
   padding: 25px 25px 23px 25px;
 }
 
+/* Кнопка Like (карточка) */
+.card__like-button {
+  min-width: 130px;
+}
+
 .card__icon-button {
   display: grid;
   border: 2px solid transparent;
@@ -210,6 +215,92 @@
   border-color: var(--text-color, #000000);
 }
 
+/* Стили для иконки сердца */
+.like-icon {
+  block-size: 36px;
+  inline-size: 39px;
+}
+
+.like-icon .core {
+  fill: transparent;
+  transition: fill 0.3s 0.03s linear;
+}
+
+.like-icon:hover .core {
+  fill: var(--text-color, #000000);
+  transition: fill 0.3s linear;
+}
+
+.like-icon .main-body {
+  fill: transparent;
+  transition: fill 0.3s linear;
+}
+
+.like-icon:hover .main-body {
+  fill: var(--text-color, #000000);
+  transition: fill 0.3s 0.05s linear;
+}
+
+.like-icon .contour {
+  fill: var(--text-color, #000000);
+  transition: fill 0.1s linear;
+}
+
+.like-icon .sparks {
+  fill: var(--accent-color, #ff4d4d);
+  opacity: 0;
+}
+
+/* Состояние лайка */
+.like-icon.is-liked .core {
+  fill: var(--accent-color, #ff4d4d);
+  transition: fill 0.3s linear;
+}
+
+.like-icon.is-liked .main-body {
+  fill: var(--accent-color, #ff4d4d);
+  transition: fill 0.3s 0.05s linear;
+}
+
+.like-icon.is-liked .contour {
+  fill: var(--accent-color, #ff4d4d);
+  transition: fill 0.3s 0.06s linear;
+}
+
+.like-icon.is-liked {
+  animation: heart-pop 0.3s ease-in 0.1s 1 alternate;
+}
+
+.like-icon.is-liked .sparks {
+  animation: sparks-flicker 0.3s ease-in 0.3s 1 alternate;
+}
+
+/* Анимации */
+@keyframes heart-pop {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.5);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes sparks-flicker {
+  0% {
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Общие стили кнопок */
 .button {
   position: relative;
   z-index: 1;
@@ -260,6 +351,8 @@
 
 .button__text,
 .button__icon {
+  position: relative;
+  z-index: 2;
   color: var(--button-text-color, #ffffff);
   mix-blend-mode: difference;
 }
@@ -267,13 +360,10 @@
 .button__icon {
   block-size: 22px;
   inline-size: 22px;
+  fill: currentColor;
 }
 
-.like-icon {
-  block-size: 36px;
-  inline-size: 39px;
-}
-
+/* Медиа-запросы */
 @media (width < 376px) {
   .modal {
     padding: 28px 34px 28px 40px;
