@@ -39,36 +39,3 @@ function setButtonText(heart, button) {
     );
   }
 }
-
-// Получаем элементы
-const saveButton = document.getElementById('saveButton');
-const dialog = document.getElementById('dialog-save');
-const closeButton = document.getElementById('closeDialogButton');
-
-// Открытие диалога
-if (saveButton && dialog) {
-  saveButton.addEventListener('click', function(event) {
-    event.preventDefault();
-    dialog.showModal();
-  });
-}
-
-// Закрытие диалога
-if (closeButton && dialog) {
-  closeButton.addEventListener('click', function(event) {
-    event.preventDefault();
-    dialog.close();
-  });
-}
-
-// Защита от отправки форм (на всякий случай)
-document.querySelectorAll('form').forEach(form => {
-  form.addEventListener('submit', function(event) {
-    event.preventDefault();
-  });
-});
-
-// Защита от любых кнопок без type="button"
-document.querySelectorAll('button:not([type="button"]):not([type="submit"])').forEach(button => {
-  button.setAttribute('type', 'button');
-});

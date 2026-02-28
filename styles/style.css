@@ -1,12 +1,16 @@
 /* Здесь вы напишете основную часть стилей страницы.
 
 Будьте внимательны! Для корректной работы скриптов на этом сайте нужно, чтобы в HTML некоторые классы были названы особым образом:
+✦ theme-dark — класс тёмной темы
+✦ theme-light — класс светлой темы
 ✦ like-icon — для svg-иконки анимированного сердца
 ✦ card__like-button — для кнопки Like рядом с иконкой
 ✦ card__icon-button — для кнопки, оборачивающей иконку
 ✦ card__icon-button — для кнопки, оборачивающей иконку
 ✦ is-liked — для обозначения состояния лайкнутой иконки в виде сердца
 ✦ button__text — для обозначения текстового элемента внутри кнопки
+
+Кроме этого, не меняйте HTML переключателя тем. Его разметка также гарантирует работу своего скрипта.
 
 */
 
@@ -68,6 +72,7 @@
 
 .modal[open] {
   display: grid;
+  /* Safari fix */
   grid-template-rows: repeat(2, min-content);
   gap: 30px;
 }
@@ -102,10 +107,8 @@
   justify-items: center;
   justify-content: center;
   font-family: var(--page-accent-font-family, "PressStart2P", fantasy);
-  padding-bottom: 128px;
   line-height: normal;
   text-transform: uppercase;
-  text-align: center;
 }
 
 .header__title {
@@ -149,21 +152,27 @@
 
 .card__img-wrapper {
   position: relative;
+  /* overflow - для коррекции эффектов filter blur */
   overflow: hidden;
 }
 
 .card__img-label {
   position: absolute;
   z-index: 1;
+
   opacity: 0.5;
+
   color: var(--text-color, #000000);
   font-family: var(--page-accent-font-family, "PressStart2P", fantasy);
+
   font-size: 14px;
   line-height: normal;
+
   text-transform: uppercase;
   text-shadow: 0 0 1px var(--page-background-color, #ffffff);
   inset-inline-end: 13px;
   inset-block-start: 24px;
+
   mix-blend-mode: hard-light;
 }
 
@@ -192,11 +201,6 @@
   padding: 25px 25px 23px 25px;
 }
 
-/* Кнопка Like (карточка) */
-.card__like-button {
-  min-width: 130px;
-}
-
 .card__icon-button {
   display: grid;
   border: 2px solid transparent;
@@ -215,92 +219,6 @@
   border-color: var(--text-color, #000000);
 }
 
-/* Стили для иконки сердца */
-.like-icon {
-  block-size: 36px;
-  inline-size: 39px;
-}
-
-.like-icon .core {
-  fill: transparent;
-  transition: fill 0.3s 0.03s linear;
-}
-
-.like-icon:hover .core {
-  fill: var(--text-color, #000000);
-  transition: fill 0.3s linear;
-}
-
-.like-icon .main-body {
-  fill: transparent;
-  transition: fill 0.3s linear;
-}
-
-.like-icon:hover .main-body {
-  fill: var(--text-color, #000000);
-  transition: fill 0.3s 0.05s linear;
-}
-
-.like-icon .contour {
-  fill: var(--text-color, #000000);
-  transition: fill 0.1s linear;
-}
-
-.like-icon .sparks {
-  fill: var(--accent-color, #ff4d4d);
-  opacity: 0;
-}
-
-/* Состояние лайка */
-.like-icon.is-liked .core {
-  fill: var(--accent-color, #ff4d4d);
-  transition: fill 0.3s linear;
-}
-
-.like-icon.is-liked .main-body {
-  fill: var(--accent-color, #ff4d4d);
-  transition: fill 0.3s 0.05s linear;
-}
-
-.like-icon.is-liked .contour {
-  fill: var(--accent-color, #ff4d4d);
-  transition: fill 0.3s 0.06s linear;
-}
-
-.like-icon.is-liked {
-  animation: heart-pop 0.3s ease-in 0.1s 1 alternate;
-}
-
-.like-icon.is-liked .sparks {
-  animation: sparks-flicker 0.3s ease-in 0.3s 1 alternate;
-}
-
-/* Анимации */
-@keyframes heart-pop {
-  0% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.5);
-  }
-  100% {
-    transform: scale(1);
-  }
-}
-
-@keyframes sparks-flicker {
-  0% {
-    opacity: 0;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-/* Общие стили кнопок */
 .button {
   position: relative;
   z-index: 1;
@@ -351,8 +269,6 @@
 
 .button__text,
 .button__icon {
-  position: relative;
-  z-index: 2;
   color: var(--button-text-color, #ffffff);
   mix-blend-mode: difference;
 }
@@ -360,10 +276,14 @@
 .button__icon {
   block-size: 22px;
   inline-size: 22px;
-  fill: currentColor;
 }
 
-/* Медиа-запросы */
+.like-icon {
+  block-size: 36px;
+  inline-size: 39px;
+}
+
+/* 376 взято так как в фигме на 375 уже стоят определенные стили, а при использовании width <= 375px 375 все еще включает в себя стили для значений больше 375 ???? */
 @media (width < 376px) {
   .modal {
     padding: 28px 34px 28px 40px;
