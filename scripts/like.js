@@ -39,3 +39,9 @@ function setButtonText(heart, button) {
     );
   }
 }
+
+
+document.getElementById('saveForm')?.addEventListener('submit', function(e) {
+  e.preventDefault(); 
+  document.getElementById('dialog-save').close();
+});
