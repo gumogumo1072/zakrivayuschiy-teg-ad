@@ -107,6 +107,7 @@
   justify-items: center;
   justify-content: center;
   font-family: var(--page-accent-font-family, "PressStart2P", fantasy);
+  padding-bottom: 128px;
   line-height: normal;
   text-transform: uppercase;
 }
